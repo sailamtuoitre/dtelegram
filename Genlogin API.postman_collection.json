@@ -1,0 +1,1461 @@
+{
+  "info": {
+    "_postman_id": "93b37ae8-ebb8-4910-9a23-386a86dd7b4b",
+    "name": "Genlogin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13840762",
+    "_collection_link": "https://go.postman.co/collection/13840762-93b37ae8-ebb8-4910-9a23-386a86dd7b4b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseJson = pm.response.json();",
+                  "",
+                  "pm.test(\"Response has access token\", function () {",
+                  "    pm.expect(responseJson).hasOwnProperty('access_token')",
+                  "    pm.expect(responseJson.access_token).to.be.a('string').and.not.be.empty",
+                  "",
+                  "",
+                  "    pm.collectionVariables.set(\"TOKEN\", responseJson.access_token);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"your_email@gmail.com\",\n    \"password\": \"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/backend/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get me",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseJson = pm.response.json();",
+                  "",
+                  "pm.test(\"Response has data property\", function () {",
+                  "    pm.expect(responseJson).hasOwnProperty('data')",
+                  "    pm.expect(responseJson.data).to.be.an('object')",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/auth/me",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Get profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles?offset=0&limit=20&sort_by=id&order=desc&type=0&search",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles"
+              ],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "id"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                },
+                {
+                  "key": "type",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get profile details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles/3221288",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles",
+                "3221288"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get running profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles/running",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles",
+                "running"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Start profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles/41/start",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles",
+                "41",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Stop profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles/3221196/stop",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles",
+                "3221196",
+                "stop"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete profile",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"profile_ids\": [3221288]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile groups",
+      "item": [
+        {
+          "name": "Get list groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profile-groups",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profile-groups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get profile in group",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/backend/profiles?offset=0&limit=20&sort_by=id&order=desc&type=0&search&group_ids[]=84596",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "backend",
+                "profiles"
+              ],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "id"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                },
+                {
+                  "key": "type",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": null
+                },
+                {
+                  "key": "group_ids[]",
+                  "value": "84596"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "Timezone",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/app/resources/timezones",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "app",
+                "resources",
+                "timezones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "WebGL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/app/resources/webgl",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "app",
+                "resources",
+                "webgl"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Languages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/app/resources/languages",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "app",
+                "resources",
+                "languages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fonts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/app/resources/languages",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "app",
+                "resources",
+                "languages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UserAgent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/app/resources/user-agent?os=Mac OS&browser=chrome&version=138",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "app",
+                "resources",
+                "user-agent"
+              ],
+              "query": [
+                {
+                  "key": "os",
+                  "value": "Mac OS"
+                },
+                {
+                  "key": "browser",
+                  "value": "chrome"
+                },
+                {
+                  "key": "version",
+                  "value": "138"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Automation",
+      "item": [
+        {
+          "name": "Apps",
+          "item": [
+            {
+              "name": "Get apps",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/apps?name=&page=1&limit=25&orderBy=updatedAt",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "apps"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "updatedAt"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create app",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"userId\": 1,\n    \"script\": {},\n    \"input\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/apps",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "apps"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete apps",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ids\":[\"_l4eq3oDp8sfRrMq3gJBP\"]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/apps",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "apps"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/apps' \\\r\n  -X 'DELETE' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjI3Mjg0NCIsImF1ZCI6ImdlbmxvZ2luLWJhY2tlbmQiLCJleHAiOjE3NzQ3NzI4NDQsIm5iZiI6MTc3MjE4MDg0NCwiaWF0IjoxNzcyMTgwODQ0LCJqdGkiOiIzZWJmZTE2MWJhZTczN2Y4ZDQ2MWMxMmNiYjhhMjU4MSJ9.jtEWt5rmzYF4BvNO9X8JFezG75ehtKVJk5CamW4HZxR4IWb2-L_kYoSKAUF0H076vSZjzyONQKrq-L0-sVipOaHjm3ri1GKaWOt7UCDsYr9Wv59pqHVQxDbuxU7CE9Ho2rl84zGoIPDpW2A5MGTzLQHhqv4h02LPu639l5KY6MNPdU20EqAlbODg9U0MXFubL-mby-dzeIvetgLdKcnvAhzpBm5wRMrH-M95B1qWK2R-NnzCBDlPUdQYGLk6gBVjbV07_iflGFqqo6jy6tHvtB6ewVJeS5XvVsxbn2af8TiLt6jEilGk9g6LztSG4zN8IYPLLQiNgXNHEH1Y5kfh9A' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"ids\":[\"_l4eq3oDp8sfRrMq3gJBP\"]}' \\\r\n  --compressed"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Tasks",
+          "item": [
+            {
+              "name": "Get tasks",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/tasks?page=1&limit=25&orderBy=updatedAt",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "tasks"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "updatedAt"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task details",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/tasks/cdYt04HaZ3e6sSs0QCm9B",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "tasks",
+                    "cdYt04HaZ3e6sSs0QCm9B"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "desc",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create task",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"userId\": 1,\n    \"appId\": \"JcDAnutGNDk-v9k9P4bpJ\",\n    \"input\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/task",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "task"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Add profile to task",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"profiles\": {\r\n        \"enabled\": true,\r\n        \"list\": [\r\n            {\r\n                \"id\": 25644686,\r\n                \"created_at\": \"2026-02-21T06:18:06.373337Z\",\r\n                \"name\": \"worry-tube\"\r\n            }\r\n        ]\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/tasks/cdYt04HaZ3e6sSs0QCm9B/add-profiles",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "tasks",
+                    "cdYt04HaZ3e6sSs0QCm9B",
+                    "add-profiles"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/tasks/uhAEM39y0L8fik_JJbF3m/add-profiles' \\\r\n  -X 'PUT' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"profiles\":{\"enabled\":true,\"list\":[{\"id\":625,\"created_at\":\"2026-02-26T04:02:13.045693Z\",\"name\":\"thought-cell\"}]}}' \\\r\n  --compressed"
+              },
+              "response": []
+            },
+            {
+              "name": "Remove profile from task",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\": [\r\n        25644686\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/tasks/cdYt04HaZ3e6sSs0QCm9B/remove-profiles",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "tasks",
+                    "cdYt04HaZ3e6sSs0QCm9B",
+                    "remove-profiles"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/tasks/cdYt04HaZ3e6sSs0QCm9B/remove-profiles' \\\r\n  -X 'PUT' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjI3Mjg0NCIsImF1ZCI6ImdlbmxvZ2luLWJhY2tlbmQiLCJleHAiOjE3NzQ3NzI4NDQsIm5iZiI6MTc3MjE4MDg0NCwiaWF0IjoxNzcyMTgwODQ0LCJqdGkiOiIzZWJmZTE2MWJhZTczN2Y4ZDQ2MWMxMmNiYjhhMjU4MSJ9.jtEWt5rmzYF4BvNO9X8JFezG75ehtKVJk5CamW4HZxR4IWb2-L_kYoSKAUF0H076vSZjzyONQKrq-L0-sVipOaHjm3ri1GKaWOt7UCDsYr9Wv59pqHVQxDbuxU7CE9Ho2rl84zGoIPDpW2A5MGTzLQHhqv4h02LPu639l5KY6MNPdU20EqAlbODg9U0MXFubL-mby-dzeIvetgLdKcnvAhzpBm5wRMrH-M95B1qWK2R-NnzCBDlPUdQYGLk6gBVjbV07_iflGFqqo6jy6tHvtB6ewVJeS5XvVsxbn2af8TiLt6jEilGk9g6LztSG4zN8IYPLLQiNgXNHEH1Y5kfh9A' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"ids\":[25644686]}' \\\r\n  --compressed"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete tasks",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\": [\r\n        \"uhAEM39y0L8fik_JJbF3m\"\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:55550/automation/tasks",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "55550",
+                  "path": [
+                    "automation",
+                    "tasks"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/tasks' \\\r\n  -X 'DELETE' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"ids\":[\"uhAEM39y0L8fik_JJbF3m\"]}' \\\r\n  --compressed"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Runs",
+          "item": [
+            {
+              "name": "Get task runs",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs?page=1&limit=25&order=desc&orderBy=createdAt",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task run details",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/4JJ4pn1cOYwnZKpymiO7W",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "4JJ4pn1cOYwnZKpymiO7W"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task run storages",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/4JJ4pn1cOYwnZKpymiO7W/storages?page=1&limit=25",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "4JJ4pn1cOYwnZKpymiO7W",
+                    "storages"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task run logs",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/4JJ4pn1cOYwnZKpymiO7W/logs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "4JJ4pn1cOYwnZKpymiO7W",
+                    "logs"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task run profiles",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/4JJ4pn1cOYwnZKpymiO7W/profiles?page=1&limit=25&order=asc&orderBy=updatedAt&name=",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "4JJ4pn1cOYwnZKpymiO7W",
+                    "profiles"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "updatedAt"
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create run",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": 3,\r\n    \"taskId\": \"cdYt04HaZ3e6sSs0QCm9B\",\r\n    \"appId\": \"Mc40LHiPn1mKi6lqv8uQ4\",\r\n    \"status\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/runs' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"userId\":3,\"taskId\":\"uhAEM39y0L8fik_JJbF3m\",\"appId\":\"TXS9ORY2cRl4rLwx91cCi\",\"status\":0}' \\\r\n  --compressed"
+              },
+              "response": []
+            },
+            {
+              "name": "Re-run",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"profileIds\":[]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/dDYMC6NGVL8Sp23ctjfVA/run",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "dDYMC6NGVL8Sp23ctjfVA",
+                    "run"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/runs/dDYMC6NGVL8Sp23ctjfVA/run' \\\r\n  -X 'PUT' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"profileIds\":[]}' \\\r\n  --compressed"
+              },
+              "response": []
+            },
+            {
+              "name": "Stop run",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Length",
+                    "value": "0"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs/-gQRA1Bg6VquP7wVINZOW/stop",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs",
+                    "-gQRA1Bg6VquP7wVINZOW",
+                    "stop"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/runs/-gQRA1Bg6VquP7wVINZOW/stop' \\\r\n  -X 'PUT' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Length: 0' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --compressed"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete runs",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://127.0.0.1:5173"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://127.0.0.1:5173/"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-site"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\": [\r\n        \"izZsEfM3N8H9Ym06zjiB0\",\r\n        \"dDYMC6NGVL8Sp23ctjfVA\"\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/automation/runs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "automation",
+                    "runs"
+                  ]
+                },
+                "description": "Generated from cURL: curl 'http://127.0.0.1:55550/automation/runs' \\\r\n  -X 'DELETE' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvYXV0aC5nZW5sb2dpbiIsInN1YiI6IjMiLCJhdWQiOiJnZW5sb2dpbi1iYWNrZW5kIiwiZXhwIjoxNzcyMDgxMTU1LCJuYmYiOjE3NzIwNzc1NTUsImlhdCI6MTc3MjA3NzU1NSwianRpIjoiMzFlZWYxMDY3OWEzNjU5ZWIyY2U2M2UzMDFhNzAxMjEiLCJlbWFpbCI6Imh1eWR1eS53b3JrQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IkR1eSJ9.Co9ODFj2fxKF1mRwEQxh7PDazfyoRzfnGpsgF2JAit4xUCxmcVVfYt-ZfxQ5WoYxiJXcAxq1t31Y52Va-cCPiR-acG_X8wM0girbzl64LmuDjoal4rmyT_zRy0YJFdV30MJWEq2BFDvUNeiICYhJ9JCZhrV_20cy_VB2jIkm7Bw' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Origin: http://127.0.0.1:5173' \\\r\n  -H 'Referer: http://127.0.0.1:5173/' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-site' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw '{\"ids\":[\"izZsEfM3N8H9Ym06zjiB0\",\"dDYMC6NGVL8Sp23ctjfVA\"]}' \\\r\n  --compressed"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:55550"
+    },
+    {
+      "key": "TOKEN",
+      "value": ""
+    }
+  ]
+}
