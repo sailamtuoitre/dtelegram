@@ -32,7 +32,7 @@ python -m venv .venv
 Cài thư viện cần thiết:
 
 ```powershell
-pip install requests playwright
+pip install -r requirements.txt
 playwright install
 ```
 
